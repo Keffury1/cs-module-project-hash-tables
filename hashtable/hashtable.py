@@ -74,10 +74,16 @@ class HashTable:
         return self.djb2(key) % self.capacity
 
     def put(self, key, value):
-        """
-        Store the value with the given key.
+        index = self.hash_index(key)
+        item = self.storage[index]
+        entry = HashTableEntry(key, value)
+        self.size += 1
 
-        Hash collisions should be handled with Linked List Chaining.
+        if item:
+            self.storage[index] = entry
+            self.storage[index].next = item
+        else:
+            self.storage[index] = entry
 
         Implement this.
         """
