@@ -30,7 +30,7 @@ class HashTable:
     def djb2(self, key):
         hash = 5381
         for item in key:
-            hash = (hash * 33) + ord(item)
+            hash = (hash * 33) + hash + ord(item)
         return hash
 
     def hash_index(self, key):
@@ -67,13 +67,21 @@ class HashTable:
     
 
     def resize(self, new_capacity):
-        """
-        Changes the capacity of the hash table and
-        rehashes all key/value pairs.
+        load = self.get_load_factor()
+        if load > 0.7:
+            # Make a new array of double the size
 
-        Implement this.
-        """
-        # Your code here
+            old_table = self.storage
+            self.capacity = new_capacity
+            self.storage = [None] * (self.capacity)
+
+            # Go through all the elements in the old hash table
+            for element in old_table:
+                current = element
+                # we want to then put the element into the new_table
+                while current is not None:
+                    self.put(current.key, current.value)
+                    current = current.next
 
 
 
