@@ -51,7 +51,7 @@ class HashTable:
     def delete(self, key):
         if self.get(key):
             self.put(key, None)
-            self.count -= 1
+            self.size -= 1
         else:
             print("No Key Found")
 
@@ -69,16 +69,11 @@ class HashTable:
     def resize(self, new_capacity):
         load = self.get_load_factor()
         if load > 0.7:
-            # Make a new array of double the size
-
             old_table = self.storage
             self.capacity = new_capacity
             self.storage = [None] * (self.capacity)
-
-            # Go through all the elements in the old hash table
-            for element in old_table:
-                current = element
-                # we want to then put the element into the new_table
+            for item in old_table:
+                current = item
                 while current is not None:
                     self.put(current.key, current.value)
                     current = current.next
