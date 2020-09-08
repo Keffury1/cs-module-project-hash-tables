@@ -1,5 +1,19 @@
 def no_dups(s):
-    # Your code here
+    my_dict = {}
+    string = ""
+
+    for word in s.split():
+        if word in my_dict:
+            pass
+        else:
+            if string == "":
+                string += word
+                my_dict.update({ word: 1 })
+            else:
+                string += f' {word}'
+                my_dict.update({ word: 1 })
+
+    return string
 
 
 
