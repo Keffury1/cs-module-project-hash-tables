@@ -1,5 +1,20 @@
+
 def word_count(s):
-    # Your code here
+    my_dict = {}
+
+    for word in s.split():
+        word = word.lower()
+        leave_out = '":;,.-+=/\\|[]{}()*^&'
+
+        for item in word:
+            if item in leave_out:
+                word = word.replace(item, "")
+        
+        if word in my_dict:
+            my_dict[word] += 1
+        elif word != "":
+            my_dict.update({ word: 1 })
+    return my_dict
 
 
 
